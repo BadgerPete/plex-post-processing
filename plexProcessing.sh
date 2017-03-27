@@ -5,8 +5,12 @@
 # Sleep for a pseudorandom period (up to 10 seconds) to limit the number of instances that start at once
 # $$ = process % = modulo
 sleep `echo $$%10 | bc`
-now = `date`
-starttime = `date +%s`
+
+now=`date +"%Y%m%d"`
+echo "Script started ${now}" >> /tmp/comchap.log
+
+starttime=`date +%s`
+echo "At this second mark: ${starttime}" >> /tmp/comchap.log
 
 filedirname=$(dirname "$1")
 echo "filedirname: ${filedirname}" >> /tmp/comchap.log
@@ -28,6 +32,6 @@ echo "Processing: $now $1" >> /tmp/comchap.log
 ffmpeg -i "/tmp/${fullfilename}" -acodec copy -vcodec copy "${filedirname}/${filename}.mp4"
 
 #
-endtime = `date +%s`
-@ timediff = $endtime - $starttime
-echo "Complete:   $timediff seconds $1" >> /tmp/comchap.log
+endtime=`date +%s`
+timediff=`expr $endtime - $starttime`
+echo "Complete, ran for: $timediff seconds $1"
