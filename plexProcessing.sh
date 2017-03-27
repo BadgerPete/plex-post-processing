@@ -29,7 +29,7 @@ echo "Processing: $now $1" >> /tmp/comchap.log
 /usr/local/comskiplinux/comchap/comcut --ffmpeg=/usr/local/bin/ffmpeg --comskip=/usr/local/comskiplinux/Comskip-master/comskip --lockfile=/tmp/comchap.lock --comskip-ini=/usr/local/comskiplinux/Comskip-master/comskip.ini "$1" "/tmp/${fullfilename}"
 
 # Re-encode as an mp4 file so we keep the original
-ffmpeg -i "/tmp/${fullfilename}" -acodec copy -vcodec copy "${filedirname}/${filename}.mp4"
+/usr/local/bin/ffmpeg -i "/tmp/${fullfilename}" -acodec copy -vcodec copy "${filedirname}/${filename}.mp4"
 
 #
 endtime=`date +%s`
